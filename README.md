@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📚 BookShare – Used Book Sharing Platform
 
-## Getting Started
+A full-stack Used Book Sharing App built with Next.js, Prisma, PostgreSQL, Zod, Socket.IO, and LangGraph.
 
-First, run the development server:
+Users can:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+📖 List books they want to share
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔍 Browse available books
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🤝 Send requests to book owners
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+💬 Chat in real-time
 
-## Learn More
+🧠 Get AI-powered recommendations
 
-To learn more about Next.js, take a look at the following resources:
+🚀 Tech Stack
+🖥 Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Next.js (App Router)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+TypeScript
 
-## Deploy on Vercel
+TailwindCSS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ShadCN UI
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🗄 Backend
+
+Next.js API Routes / Server Actions
+
+Prisma ORM
+
+PostgreSQL
+
+Zod (schema validation)
+
+💬 Real-time Communication
+
+Socket.IO (WebSocket-based chat)
+
+🧠 AI Integration
+
+LangGraph
+
+OpenAI API (for recommendations & moderation)
+
+🔐 Authentication
+
+NextAuth (Google / Email login)
+
+📦 Storage
+
+AWS S3 / Cloudinary (for book images)
+
+✨ Features
+📚 Book Management
+
+Add, edit, delete books
+
+Upload book images
+
+Filter by category, condition, location
+
+🤝 Request System
+
+Send request to book owner
+
+Accept / Reject requests
+
+Track request status
+
+💬 Real-Time Chat
+
+Owner ↔ Requester messaging
+
+Typing indicators
+
+Message history
+
+Seen status
+
+🧠 AI-Powered Features
+
+Smart book recommendations
+
+Auto-generate book descriptions
+
+Spam detection in chat
+
+Similar book suggestions
+
+🔒 Secure & Type-Safe
+
+Authentication & protected routes
+
+Zod validation on all APIs
+
+Prisma type-safe queries
+
