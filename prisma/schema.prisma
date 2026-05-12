@@ -20,8 +20,10 @@ model User{
   books Book[]
 }
 model Book{
-  id String @id
+  id String @id @default(cuid())
   title String
   author String
   description String
+  userId String
+  user User @relation(fields: [userId], references: [userId])
 }
