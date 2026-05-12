@@ -13,7 +13,7 @@ export const checkUser = async () => {
       }
     })
     if (!checkExistingUser){
-        // creatting a new User
+        // creating a new User
         await prisma.user.create({
             data:{
                 userId: userId,
