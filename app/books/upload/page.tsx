@@ -3,22 +3,18 @@
 import { createBook } from '@/app/actions/book'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { UploadButton, UploadDropzone } from '../../../utils/uplaodthing'
+import Image from 'next/image'
 
 export default function UploadPage() {
   const router = useRouter()
-
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({})
+  const [photos, setPhotos] = useState<string[]>([])
 
-  const [fieldErrors, setFieldErrors] = useState<
-    Record<string, string[]>
-  >({})
-
-  async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-
     setLoading(true)
     setError(null)
     setFieldErrors({})
@@ -32,34 +28,29 @@ export default function UploadPage() {
       city: form.get('city'),
       state: form.get('state'),
       description: form.get('description'),
-      photos: [],
+      photos: photos.length > 0 ? photos : []
     }
 
-    try {
-      const result = await createBook(data)
+    const result = await createBook(data)
 
-      if ('error' in result) {
-        if ('fieldErrors' in result) {
-          setFieldErrors(result.fieldErrors)
-          setError('Please fix the errors below')
-        } else {
-          setError(result.error)
-        }
-
-        setLoading(false)
-        return
-      }
-
-      router.push('/books')
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong')
-    } finally {
+    if ('error' in result) {
       setLoading(false)
+
+      if ('fieldErrors' in result) {
+        setFieldErrors(result.fieldErrors)
+        setError('Please fix the errors below')
+      } else {
+        setError(result.error)
+      }
+      return
     }
+
+    setLoading(false)
+    router.push('/books')
   }
 
   const inputStyles =
-    'w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black dark:bg-zinc-900 dark:text-white dark:border-zinc-700 dark:placeholder:text-zinc-400'
+    'w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white'
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black py-12 px-4">
@@ -75,7 +66,7 @@ export default function UploadPage() {
           </p>
         </div>
 
-        {/* Error */}
+        {/* General error message */}
         {error && (
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg">
             <p className="text-red-800 dark:text-red-300 text-sm font-medium">
@@ -89,7 +80,79 @@ export default function UploadPage() {
           onSubmit={handleSubmit}
           className="bg-white dark:bg-zinc-950 rounded-lg shadow p-8"
         >
-          {/* Title */}
+          {/* Photo Upload */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Book Cover Photo
+            </label>
+
+            {photos.length === 0 ? (
+              <div className="border-2 border-dashed border-gray-300 dark:border-zinc-700 rounded-lg p-6">
+                <UploadDropzone
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(res) => {
+                    if (res) {
+                      const urls = res.map((file) => file.url)
+                      setPhotos(urls)
+                      setError(null)
+                    }
+                  }}
+                  onUploadError={(error: Error) => {
+                    setError(`Upload failed: ${error.message}`)
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {/* Photo preview grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {photos.map((photo, idx) => (
+                    <div key={idx} className="relative">
+                      <Image
+                        src={photo}
+                        alt={`Book cover ${idx + 1}`}
+                        width={200}
+                        height={300}
+                        className="w-full h-64 object-cover rounded-lg"
+                      />
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setPhotos(
+                            photos.filter((_, i) => i !== idx)
+                          )
+                        }
+                        className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Add more photos button */}
+                {photos.length < 4 && (
+                  <div className="border-2 border-dashed border-gray-300 dark:border-zinc-700 rounded-lg p-6">
+                    <UploadButton
+                      endpoint="imageUploader"
+                      onClientUploadComplete={(res) => {
+                        if (res) {
+                          const urls = res.map((file) => file.url)
+                          setPhotos([...photos, ...urls])
+                        }
+                      }}
+                      onUploadError={(error: Error) => {
+                        setError(`Upload failed: ${error.message}`)
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Title field */}
           <div className="mb-6">
             <label
               htmlFor="title"
@@ -114,7 +177,7 @@ export default function UploadPage() {
             )}
           </div>
 
-          {/* Author */}
+          {/* Author field */}
           <div className="mb-6">
             <label
               htmlFor="author"
@@ -139,7 +202,7 @@ export default function UploadPage() {
             )}
           </div>
 
-          {/* Condition */}
+          {/* Condition field */}
           <div className="mb-6">
             <label
               htmlFor="condition"
@@ -153,7 +216,6 @@ export default function UploadPage() {
               name="condition"
               required
               className={inputStyles}
-              defaultValue=""
             >
               <option value="">Select condition</option>
 
@@ -177,7 +239,7 @@ export default function UploadPage() {
             )}
           </div>
 
-          {/* Description */}
+          {/* Description field */}
           <div className="mb-6">
             <label
               htmlFor="description"
@@ -189,7 +251,7 @@ export default function UploadPage() {
             <textarea
               id="description"
               name="description"
-              placeholder="Tell others about this book..."
+              placeholder="Tell others about this book... (optional)"
               rows={4}
               className={`${inputStyles} resize-none`}
             />
@@ -201,9 +263,8 @@ export default function UploadPage() {
             )}
           </div>
 
-          {/* City + State */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            {/* City */}
+          {/* City field */}
+          <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
               <label
                 htmlFor="city"
@@ -228,7 +289,7 @@ export default function UploadPage() {
               )}
             </div>
 
-            {/* State */}
+            {/* State field */}
             <div>
               <label
                 htmlFor="state"
@@ -254,11 +315,11 @@ export default function UploadPage() {
             </div>
           </div>
 
-          {/* Submit */}
+          {/* Submit button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black dark:bg-white text-white dark:text-black font-medium py-3 rounded-lg hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-black dark:bg-white text-white dark:text-black font-medium py-3 rounded-lg hover:opacity-90 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             {loading ? 'Sharing book...' : 'Share book'}
           </button>
