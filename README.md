@@ -98,3 +98,4 @@ Zod validation on all APIs
 
 Prisma type-safe queries
 
+Proper error handling
