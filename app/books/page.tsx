@@ -2,6 +2,7 @@ import {prisma} from "../../lib/prisma";
 import {checkUser} from "../../lib/checkUser";
 import BookCard from "../../components/BookCard";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 
 export default async function BooksPage({searchParams}: {searchParams: any}){
@@ -59,9 +60,9 @@ export default async function BooksPage({searchParams}: {searchParams: any}){
       {/* ADD BUTTON */}
       <div className="mt-10 flex justify-center">
         <Link href="/books/new">
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-full">
+          <Button className="bg-blue-600 text-white px-6 py-3 rounded-full">
             + Add New Book
-          </button>
+          </Button>
         </Link>
       </div>
         
