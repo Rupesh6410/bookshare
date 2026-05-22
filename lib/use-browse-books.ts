@@ -46,6 +46,6 @@ export function useBrowseBooks(params: BrowseBooksParams = {}) {
       if (!response.ok) throw new Error('Failed to fetch books')
       return response.json() as Promise<BrowseBooksResponse>
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes (matches Redis TTL)
+    staleTime: 5 * 60 * 1000, 
   })
 }

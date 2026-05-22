@@ -1,0 +1,8 @@
+{"bookId":"cmpdzzfgp0001a5u97bhld9pi","error":"You cannot request your own book","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-21 20:27:02"}
+{"bookId":"cmpdzzfgp0001a5u97bhld9pi","error":"Cannot read properties of undefined (reading 'findUnique')","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:07:44"}
+{"bookId":"cmpdzzfgp0001a5u97bhld9pi","error":"Cannot read properties of undefined (reading 'findUnique')","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:08:50"}
+{"bookId":"cmpdzzfgp0001a5u97bhld9pi","error":"Cannot read properties of undefined (reading 'findUnique')","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:09:01"}
+{"bookId":"cmpgv86es0005a5jvj7pygt9b","error":"You cannot request your own book","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:28:32"}
+{"bookId":"cmpgv86es0005a5jvj7pygt9b","error":"You cannot request your own book","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:28:38"}
+{"bookId":"cmpgvndte0001a5p5ysisi1uc","error":"This book is no longer available. Someone else may have requested it.","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:44:46"}
+{"bookId":"cmpgvndte0001a5p5ysisi1uc","error":"This book is no longer available. Someone else may have requested it.","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:45:14"}

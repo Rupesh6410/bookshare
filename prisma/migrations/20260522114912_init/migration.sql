@@ -4,13 +4,9 @@ CREATE TABLE "User" (
     "clerkId" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "avatar" TEXT,
     "city" TEXT NOT NULL DEFAULT '',
     "state" TEXT NOT NULL DEFAULT '',
-    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
-    "ratingCount" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -20,10 +16,9 @@ CREATE TABLE "Book" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "author" TEXT NOT NULL,
-    "genre" TEXT,
     "condition" TEXT NOT NULL,
     "description" TEXT,
-    "photos" TEXT[],
+    "photos" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'AVAILABLE',
@@ -41,6 +36,7 @@ CREATE TABLE "Request" (
     "requesterId" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Request_pkey" PRIMARY KEY ("id")
 );
@@ -75,13 +71,31 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE INDEX "Book_city_idx" ON "Book"("city");
 
 -- CreateIndex
-CREATE INDEX "Book_status_city_idx" ON "Book"("status", "city");
+CREATE INDEX "Book_status_idx" ON "Book"("status");
+
+-- CreateIndex
+CREATE INDEX "Book_ownerId_status_idx" ON "Book"("ownerId", "status");
+
+-- CreateIndex
+CREATE INDEX "Request_requesterId_idx" ON "Request"("requesterId");
+
+-- CreateIndex
+CREATE INDEX "Request_status_idx" ON "Request"("status");
+
+-- CreateIndex
+CREATE INDEX "Request_bookId_status_idx" ON "Request"("bookId", "status");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Request_bookId_requesterId_key" ON "Request"("bookId", "requesterId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ChatRoom_requestId_key" ON "ChatRoom"("requestId");
+
+-- CreateIndex
+CREATE INDEX "Message_chatRoomId_idx" ON "Message"("chatRoomId");
+
+-- CreateIndex
+CREATE INDEX "Message_senderId_idx" ON "Message"("senderId");
 
 -- AddForeignKey
 ALTER TABLE "Book" ADD CONSTRAINT "Book_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
