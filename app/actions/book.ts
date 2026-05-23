@@ -5,6 +5,7 @@ import { checkUser } from '@/lib/checkUser'
 import { revalidatePath } from 'next/cache'
 import { bookSchema } from '@/lib/validations'
 import { AppError } from '@/lib/app-error'
+import { invalidateBrowseCache } from '@/lib/cache-invalidation'
 
 // CREATE BOOK
 export async function createBook(data: unknown) {
@@ -44,6 +45,9 @@ export async function createBook(data: unknown) {
         ownerId: user.id
       }
     })
+    
+    // Invalidate browse cache when a new book is added
+    await invalidateBrowseCache()
 
     revalidatePath('/books')
     return { success: true, book }
@@ -51,7 +55,7 @@ export async function createBook(data: unknown) {
   } catch (error) {
     return handleError(error)
   }
-  
+
 }
 
 // UPDATE BOOK
@@ -103,6 +107,9 @@ export async function updateBook(id: string, data: unknown) {
         state: result.data.state,
       }
     })
+    
+    
+    await invalidateBrowseCache()
 
     revalidatePath('/books')
     revalidatePath(`/books/${id}`)
@@ -144,6 +151,9 @@ export async function deleteBook(id: string) {
     await prisma.book.delete({
       where: { id }
     })
+
+    
+    await invalidateBrowseCache()
 
     revalidatePath('/books')
     return { success: true }

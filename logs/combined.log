@@ -109,3 +109,27 @@
 {"bookId":"cmpgvndte0001a5p5ysisi1uc","level":"info","message":"Creating book request","service":"bookshare","timestamp":"2026-05-22 17:45:13"}
 {"bookId":"cmpgvndte0001a5p5ysisi1uc","currentStatus":"REQUESTED","level":"warn","message":"Book no longer available","service":"bookshare","timestamp":"2026-05-22 17:45:14"}
 {"bookId":"cmpgvndte0001a5p5ysisi1uc","error":"This book is no longer available. Someone else may have requested it.","level":"error","message":"Error creating book request","service":"bookshare","timestamp":"2026-05-22 17:45:14"}
+{"level":"info","message":"Redis connected successfully","service":"bookshare","timestamp":"2026-05-22 17:53:41"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","city":"","level":"info","message":"Redis cache miss, fetching from database","search":"","service":"bookshare","timestamp":"2026-05-22 17:53:41"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","city":"","count":0,"level":"info","message":"Books fetched and cached in Redis","search":"","service":"bookshare","timestamp":"2026-05-22 17:53:41","ttl":300}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","level":"info","message":"Redis cache hit for browse books","service":"bookshare","timestamp":"2026-05-22 17:53:45"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","level":"info","message":"Redis cache hit for browse books","service":"bookshare","timestamp":"2026-05-22 17:53:49"}
+{"level":"info","message":"Redis connected successfully","service":"bookshare","timestamp":"2026-05-22 17:54:11"}
+{"level":"info","message":"Invalidated 1 browse cache keys after book mutation","service":"bookshare","timestamp":"2026-05-22 17:54:12"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","city":"","level":"info","message":"Redis cache miss, fetching from database","search":"","service":"bookshare","timestamp":"2026-05-22 17:54:18"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","city":"","count":1,"level":"info","message":"Books fetched and cached in Redis","search":"","service":"bookshare","timestamp":"2026-05-22 17:54:18","ttl":300}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","level":"info","message":"Redis cache hit for browse books","service":"bookshare","timestamp":"2026-05-22 17:54:36"}
+{"bookId":"cmpgw5y5k0001a5n4tcpzypqr","level":"info","message":"Creating book request","service":"bookshare","timestamp":"2026-05-22 17:54:44"}
+{"bookId":"cmpgw5y5k0001a5n4tcpzypqr","bookTitle":"pls ","level":"info","message":"Book request created successfully","requestId":"cmpgw6ngn0003a5n4ggx2falo","requesterId":"cmpgv1jt60000a5jv1a5rasts","service":"bookshare","timestamp":"2026-05-22 17:54:45"}
+{"keysDeleted":1,"level":"info","message":"Browse books cache invalidated","service":"bookshare","timestamp":"2026-05-22 17:54:45"}
+{"count":2,"level":"info","message":"Incoming requests fetched","service":"bookshare","timestamp":"2026-05-22 17:54:55","userId":"cmpgv86eg0003a5jva6d0cvy8"}
+{"level":"info","message":"Rejecting request","requestId":"cmpgw6ngn0003a5n4ggx2falo","service":"bookshare","timestamp":"2026-05-22 17:55:00"}
+{"level":"info","message":"Request rejected successfully","requestId":"cmpgw6ngn0003a5n4ggx2falo","service":"bookshare","timestamp":"2026-05-22 17:55:01","userId":"cmpgv86eg0003a5jva6d0cvy8"}
+{"count":2,"level":"info","message":"Incoming requests fetched","service":"bookshare","timestamp":"2026-05-22 17:55:01","userId":"cmpgv86eg0003a5jva6d0cvy8"}
+{"level":"info","message":"Accepting request","requestId":"cmpgvbf7i000aa5jvegr6y390","service":"bookshare","timestamp":"2026-05-22 17:55:26"}
+{"level":"info","message":"Request accepted successfully","requestId":"cmpgvbf7i000aa5jvegr6y390","service":"bookshare","timestamp":"2026-05-22 17:55:27","userId":"cmpgv86eg0003a5jva6d0cvy8"}
+{"count":2,"level":"info","message":"Incoming requests fetched","service":"bookshare","timestamp":"2026-05-22 17:55:27","userId":"cmpgv86eg0003a5jva6d0cvy8"}
+{"count":2,"level":"info","message":"Incoming requests fetched","service":"bookshare","timestamp":"2026-05-22 17:56:09","userId":"cmpgv86eg0003a5jva6d0cvy8"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","city":"","level":"info","message":"Redis cache miss, fetching from database","search":"","service":"bookshare","timestamp":"2026-05-22 17:57:22"}
+{"cacheKey":"books:browse:city=:search=:page=1:pageSize=12","city":"","count":1,"level":"info","message":"Books fetched and cached in Redis","search":"","service":"bookshare","timestamp":"2026-05-22 17:57:22","ttl":300}
+{"count":2,"level":"info","message":"Incoming requests fetched","service":"bookshare","timestamp":"2026-05-22 18:00:26","userId":"cmpgv86eg0003a5jva6d0cvy8"}
